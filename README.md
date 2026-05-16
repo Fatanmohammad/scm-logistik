@@ -1,58 +1,192 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SCM Logistik
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Platform berbasis web untuk manajemen rantai pasok/logistik sederhana. Aplikasi ini membantu pengelolaan produk, stok barang, pengiriman, laporan mutasi, laporan stok, serta manajemen pengguna berdasarkan role.
 
-## About Laravel
+Dibangun menggunakan Laravel 13 + Blade + Tailwind CSS + Vite, dengan sistem autentikasi dan pembatasan akses berbasis role seperti `admin`, `manager`, `staf`, dan `kurir`.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> Project aplikasi SCM Logistik berbasis Laravel.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Daftar Isi
 
-## Learning Laravel
+- Stack & Konvensi
+- Cara Menjalankan
+- Struktur Aplikasi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Stack & Konvensi
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+| Aspek | Pilihan |
+| --- | --- |
+| Framework | Laravel 13 |
+| Bahasa Backend | PHP 8.3+ |
+| Database | MySQL / database Laravel sesuai konfigurasi `.env` |
+| Frontend | Blade + Tailwind CSS |
+| Build Tool | Vite |
+| Package Manager PHP | Composer |
+| Package Manager JS | npm |
+| Auth | Login/Register manual melalui `AuthController` |
+| Authorization | Role-based access menggunakan `RoleMiddleware` |
+| UI Component | Blade Components bawaan Laravel/Breeze |
 
-## Agentic Development
+### Role Aplikasi
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- `admin` — akses penuh, termasuk manajemen user.
+- `manager` — akses laporan stok dan mutasi.
+- `staf` — akses pengelolaan produk, stok, dan pengiriman.
+- `kurir` — akses daftar pengiriman.
+
+### Aturan visual penting
+
+- Tampilan menggunakan Blade dan Tailwind CSS.
+- Komponen form dan tombol menggunakan Blade Components seperti `primary-button`, `secondary-button`, `danger-button`, `input-label`, dan `text-input`.
+- Layout utama aplikasi berada di folder `resources/views/layouts/`.
+
+---
+
+## Cara Menjalankan
+
+### Prasyarat
+
+- PHP 8.3+
+- Composer
+- Node.js dan npm
+- MySQL atau database lain yang sesuai dengan konfigurasi Laravel
+
+### Setup awal
 
 ```bash
-composer require laravel/boost --dev
+# 1. Install dependency PHP
+composer install
 
-php artisan boost:install
+# 2. Install dependency frontend
+npm install
+
+# 3. Copy file environment
+copy .env.example .env
+
+# 4. Generate application key
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Konfigurasi database
 
-## Contributing
+Buat database baru, misalnya:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```sql
+CREATE DATABASE scm_logistik;
+```
 
-## Code of Conduct
+Lalu sesuaikan konfigurasi database di file `.env`:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```env
+DB_DATABASE=scm_logistik
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Security Vulnerabilities
+Setelah itu jalankan migrasi dan seeder:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan migrate:fresh --seed
+```
 
-## License
+### Jalankan dev server
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Buka 2 terminal:
+
+```bash
+# Terminal 1 — Laravel
+php artisan serve
+```
+
+```bash
+# Terminal 2 — Vite
+npm run dev
+```
+
+Buka aplikasi di:
+
+```text
+http://127.0.0.1:8000
+```
+
+### Akun seed
+
+| Role | Email | Password |
+| --- | --- | --- |
+| Admin | `admin@gmail.com` | `password123` |
+
+Seeder juga menambahkan kategori awal seperti `Elektronik` dan `Logistik Umum`.
+
+---
+
+## Struktur Aplikasi
+
+```text
+app/
+├─ Http/
+│  ├─ Controllers/
+│  │  ├─ AuthController.php          ← Login, register, dan logout manual
+│  │  ├─ ProductController.php       ← CRUD produk/barang
+│  │  ├─ StockController.php         ← Update stok produk
+│  │  ├─ ShipmentController.php      ← Pengelolaan data pengiriman
+│  │  ├─ ReportController.php        ← Laporan mutasi dan laporan stok
+│  │  ├─ UserController.php          ← Manajemen user oleh admin
+│  │  └─ ProfileController.php       ← Edit, update, dan hapus profil user
+│  ├─ Middleware/
+│  │  └─ RoleMiddleware.php          ← Pembatasan akses berdasarkan role
+│  └─ Requests/
+│     └─ ProfileUpdateRequest.php    ← Validasi update profil
+├─ Models/
+│  ├─ User.php                       ← Model user dan role pengguna
+│  ├─ Category.php                   ← Model kategori produk
+│  ├─ Product.php                    ← Model produk/barang
+│  ├─ StockMovement.php              ← Model riwayat pergerakan stok
+│  └─ Shipment.php                   ← Model data pengiriman
+├─ Observers/                        ← Observer model jika ada logic otomatis
+├─ Providers/                        ← Service provider aplikasi
+└─ View/Components/                  ← Class component Blade
+
+resources/views/
+├─ layouts/                          ← Layout utama aplikasi
+├─ components/                       ← Komponen Blade reusable
+│  ├─ primary-button.blade.php       ← Tombol utama
+│  ├─ secondary-button.blade.php     ← Tombol sekunder
+│  ├─ danger-button.blade.php        ← Tombol aksi berbahaya
+│  ├─ input-label.blade.php          ← Label form
+│  ├─ text-input.blade.php           ← Input form
+│  ├─ input-error.blade.php          ← Pesan error validasi
+│  ├─ dropdown.blade.php             ← Dropdown menu
+│  ├─ nav-link.blade.php             ← Link navigasi desktop
+│  └─ responsive-nav-link.blade.php  ← Link navigasi responsive
+├─ auth/                             ← Halaman login/register
+├─ admin/users/                      ← Halaman manajemen user
+├─ products/                         ← Halaman CRUD produk
+├─ shipments/                        ← Halaman pengiriman
+├─ reports/                          ← Halaman laporan mutasi & stok
+├─ profile/                          ← Halaman profil user
+├─ dashboard.blade.php               ← Dashboard setelah login
+└─ welcome.blade.php                 ← Halaman default Laravel
+
+database/
+├─ migrations/
+│  ├─ create_users_table.php         ← Tabel user + role
+│  ├─ create_categories_table.php    ← Tabel kategori produk
+│  ├─ create_products_table.php      ← Tabel produk
+│  ├─ create_stock_movements_table.php ← Tabel riwayat stok
+│  ├─ create_shipments_table.php     ← Tabel pengiriman
+│  ├─ create_sessions_table.php      ← Tabel session Laravel
+│  └─ create_cache_table.php         ← Tabel cache Laravel
+└─ seeders/
+   ├─ DatabaseSeeder.php             ← Seeder utama akun admin & kategori awal
+   ├─ UserSeeder.php                 ← Seeder contoh user beberapa role
+   └─ ProductSeeder.php              ← Seeder produk
+
+routes/
+├─ web.php                           ← Route utama aplikasi web
+├─ auth.php                          ← Route auth/profile tambahan
+└─ console.php                       ← Route command console Laravel
+```

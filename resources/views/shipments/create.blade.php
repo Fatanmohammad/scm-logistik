@@ -53,6 +53,22 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-xs font-black text-slate-400 uppercase tracking-wider mb-2 ml-1">
+                                        Produk / Barang
+                                    </label>
+                                    <select name="product_id" class="w-full px-5 py-4 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white focus:border-slate-900 focus:ring-0 transition-all shadow-sm" required>
+                                        <option value="">-- Pilih Produk --</option>
+                                        @foreach($products as $product)
+                                            <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
+                                                {{ $product->name }} (SKU: {{ $product->sku }})
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('product_id')
+                                        <p class="text-red-500 text-xs mt-2 ml-1 font-semibold">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-black text-slate-400 uppercase tracking-wider mb-2 ml-1">
                                         Kurir <span class="text-emerald-500">(Staff)</span>
                                     </label>
                                     <select name="user_id" class="w-full px-5 py-4 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white focus:border-slate-900 focus:ring-0 transition-all shadow-sm" required>

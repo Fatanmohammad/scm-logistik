@@ -70,7 +70,6 @@
                 </div>
                 <div class="flex items-center gap-2 pt-2 border-t border-slate-50">
                     <a href="/admin/users" class="flex-1 py-2 bg-slate-50 hover:bg-slate-100 text-slate-600 text-[10px] font-black text-center rounded-lg uppercase tracking-wider transition-colors">Kelola User</a>
-                    <a href="/admin/users/create" class="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-black text-center rounded-lg uppercase tracking-wider transition-all shadow-sm">+ Tambah</a>
                 </div>
             </div>
             @endif

@@ -26,12 +26,13 @@
                     <thead>
                         <tr class="border-b border-slate-100 bg-slate-50/50">
                             <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">No Resi</th>
+                            <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Barang (SKU)</th>
                             <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Kurir</th>
                             <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Status</th>
                             <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Tujuan</th>
                             <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Tanggal</th>
                             @if(in_array(Auth::user()->role, ['admin', 'staf']))
-                            <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Aksi</th>
+                            <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-center">Aksi</th>
                             @endif
                         </tr>
                     </thead>
@@ -40,6 +41,10 @@
                         <tr class="hover:bg-slate-50/50 transition-colors group">
                             <td class="p-6">
                                 <span class="px-3 py-1.5 bg-slate-100 text-slate-600 text-[10px] font-black rounded-lg border border-slate-200 uppercase">{{ $shipment->tracking_code }}</span>
+                            </td>
+                            <td class="p-6">
+                                <p class="text-sm font-bold text-slate-700">{{ $shipment->product->name ?? '-' }}</p>
+                                <p class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider">SKU: {{ $shipment->product->sku ?? '-' }}</p>
                             </td>
                             <td class="p-6">
                                 <div class="flex items-center gap-3">
