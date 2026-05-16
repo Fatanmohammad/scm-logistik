@@ -52,15 +52,24 @@
                                     <label class="block text-xs font-black text-slate-400 uppercase tracking-wider mb-2 ml-1">
                                         Produk / Barang
                                     </label>
-                                    <select name="product_id" class="w-full px-5 py-4 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white focus:border-slate-900 focus:ring-0 transition-all shadow-sm" required>
+                                    <select name="product_id" id="product_select" class="w-full px-5 py-4 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white focus:border-slate-900 focus:ring-0 transition-all shadow-sm" required>
                                         <option value="">-- Pilih Produk --</option>
                                         @foreach($products as $product)
-                                            <option value="{{ $product->id }}" {{ old('product_id', $shipment->product_id) == $product->id ? 'selected' : '' }}>
-                                                {{ $product->name }} (SKU: {{ $product->sku }})
+                                            <option value="{{ $product->id }}" data-stock="{{ $product->stock + ($shipment->product_id == $product->id && $shipment->status != 'delivered' ? $shipment->quantity : 0) }}" {{ old('product_id', $shipment->product_id) == $product->id ? 'selected' : '' }}>
+                                                {{ $product->name }} (SKU: {{ $product->sku }}) — Stok: {{ $product->stock }}
                                             </option>
                                         @endforeach
                                     </select>
                                     @error('product_id')<p class="text-red-500 text-xs mt-2 ml-1 font-semibold">{{ $message }}</p>@enderror
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-black text-slate-400 uppercase tracking-wider mb-2 ml-1">
+                                        Jumlah Kirim
+                                    </label>
+                                    <input type="number" name="quantity" id="quantity_input" value="{{ old('quantity', $shipment->quantity) }}" min="1" placeholder="0"
+                                        class="w-full px-5 py-4 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white focus:border-slate-900 focus:ring-0 transition-all shadow-sm" required>
+                                    <p id="stock_info" class="text-[10px] font-bold text-slate-400 mt-2 ml-1">Pilih produk untuk melihat stok tersedia.</p>
+                                    @error('quantity')<p class="text-red-500 text-xs mt-2 ml-1 font-semibold">{{ $message }}</p>@enderror
                                 </div>
                                 <div>
                                     <label class="block text-xs font-black text-slate-400 uppercase tracking-wider mb-2 ml-1">
@@ -102,4 +111,32 @@
             </p>
         </div>
     </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const productSelect = document.getElementById('product_select');
+            const quantityInput = document.getElementById('quantity_input');
+            const stockInfo = document.getElementById('stock_info');
+
+            function updateStockInfo() {
+                const selectedOption = productSelect.options[productSelect.selectedIndex];
+                if(selectedOption.value) {
+                    const maxStock = selectedOption.getAttribute('data-stock');
+                    quantityInput.max = maxStock;
+                    stockInfo.textContent = 'Maksimal: ' + maxStock + ' unit.';
+                    stockInfo.classList.remove('text-slate-400');
+                    stockInfo.classList.add('text-emerald-500');
+                } else {
+                    quantityInput.removeAttribute('max');
+                    stockInfo.textContent = 'Pilih produk untuk melihat stok tersedia.';
+                    stockInfo.classList.add('text-slate-400');
+                    stockInfo.classList.remove('text-emerald-500');
+                }
+            }
+
+            productSelect.addEventListener('change', updateStockInfo);
+            updateStockInfo(); // Call once on load to set initial state
+        });
+    </script>
 </x-app-layout>

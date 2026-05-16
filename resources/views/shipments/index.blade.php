@@ -27,6 +27,7 @@
                         <tr class="border-b border-slate-100 bg-slate-50/50">
                             <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">No Resi</th>
                             <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Barang (SKU)</th>
+                            <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Jumlah</th>
                             <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Kurir</th>
                             <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Status</th>
                             <th class="p-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Tujuan</th>
@@ -47,6 +48,9 @@
                                 <p class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider">SKU: {{ $shipment->product->sku ?? '-' }}</p>
                             </td>
                             <td class="p-6">
+                                <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-lg border border-slate-200">{{ $shipment->quantity }} Unit</span>
+                            </td>
+                            <td class="p-6">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-[10px] font-black border border-emerald-100">K</div>
                                     <div>
@@ -54,7 +58,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="p-6">
+                            <td class="p-4">
                                 @if($shipment->status === 'pending')
                                     <span class="px-3 py-1.5 bg-amber-50 text-amber-600 text-[10px] font-black rounded-lg border border-amber-200 uppercase">Pending</span>
                                 @elseif($shipment->status === 'on_delivery')

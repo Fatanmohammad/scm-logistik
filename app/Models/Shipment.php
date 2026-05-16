@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Shipment extends Model
 {
-    protected $fillable = ['tracking_code', 'user_id', 'product_id', 'status', 'destination'];
+    protected $fillable = ['tracking_code', 'user_id', 'product_id', 'quantity', 'status', 'destination'];
 
     public function user(): BelongsTo
     {

@@ -2,9 +2,22 @@
 
 Platform berbasis web untuk manajemen rantai pasok/logistik sederhana. Aplikasi ini membantu pengelolaan produk, stok barang, pengiriman, laporan mutasi, laporan stok, serta manajemen pengguna berdasarkan role.
 
-Dibangun menggunakan Laravel 13 + Blade + Tailwind CSS + Vite, dengan sistem autentikasi dan pembatasan akses berbasis role seperti `admin`, `manager`, `staf`, dan `kurir`.
+Dibangun menggunakan Laravel 13 + Blade + Tailwind CSS + Vite, dengan sistem autentikasi dan pembatasan akses berbasis role seperti `admin`, `manager`, dan `staf`.
 
 > Project aplikasi SCM Logistik berbasis Laravel.
+
+---
+
+## Fitur Unggulan
+
+- **Manajemen Inventaris**: CRUD produk dengan kategori dan pelacakan stok real-time.
+- **Integrasi Stok & Pengiriman**: 
+    - Stok otomatis berkurang saat status pengiriman diubah menjadi `delivered`.
+    - Validasi otomatis untuk mencegah pengiriman melebihi stok yang tersedia.
+    - Pengembalian stok otomatis (*rollback*) jika pengiriman dibatalkan atau data pengiriman dihapus.
+- **Riwayat Mutasi**: Setiap perubahan stok (masuk/keluar/pengiriman) dicatat secara otomatis dalam tabel mutasi untuk audit trail.
+- **Keamanan**: Password visibility toggle dan autentikasi berbasis role.
+- **UI Modern**: Desain premium menggunakan Tailwind CSS dengan nuansa gelap (*dark mode*) dan navigasi yang intuitif.
 
 ---
 
@@ -19,24 +32,23 @@ Dibangun menggunakan Laravel 13 + Blade + Tailwind CSS + Vite, dengan sistem aut
 ## Stack & Konvensi
 
 | Aspek | Pilihan |
-| --- | --- |
-| Framework | Laravel 13 |
-| Bahasa Backend | PHP 8.3+ |
-| Database | MySQL / database Laravel sesuai konfigurasi `.env` |
-| Frontend | Blade + Tailwind CSS |
-| Build Tool | Vite |
-| Package Manager PHP | Composer |
-| Package Manager JS | npm |
-| Auth | Login/Register manual melalui `AuthController` |
-| Authorization | Role-based access menggunakan `RoleMiddleware` |
-| UI Component | Blade Components bawaan Laravel/Breeze |
++| --- | --- |
++| Framework | Laravel 13 |
++| Bahasa Backend | PHP 8.3+ |
++| Database | MySQL / database Laravel sesuai konfigurasi `.env` |
++| Frontend | Blade + Tailwind CSS |
++| Build Tool | Vite |
++| Package Manager PHP | Composer |
++| Package Manager JS | npm |
++| Auth | Login/Register manual melalui `AuthController` |
++| Authorization | Role-based access menggunakan `RoleMiddleware` |
++| UI Component | Blade Components bawaan Laravel/Breeze |
 
 ### Role Aplikasi
 
 - `admin` — akses penuh, termasuk manajemen user.
 - `manager` — akses laporan stok dan mutasi.
 - `staf` — akses pengelolaan produk, stok, dan pengiriman.
-- `kurir` — akses daftar pengiriman.
 
 ### Aturan visual penting
 
@@ -131,8 +143,8 @@ app/
 │  ├─ Controllers/
 │  │  ├─ AuthController.php          ← Login, register, dan logout manual
 │  │  ├─ ProductController.php       ← CRUD produk/barang
-│  │  ├─ StockController.php         ← Update stok produk
-│  │  ├─ ShipmentController.php      ← Pengelolaan data pengiriman
+│  │  ├─ StockController.php         ← Update stok produk secara manual
+│  │  ├─ ShipmentController.php      ← Pengelolaan pengiriman & auto-stok logic
 │  │  ├─ ReportController.php        ← Laporan mutasi dan laporan stok
 │  │  ├─ UserController.php          ← Manajemen user oleh admin
 │  │  └─ ProfileController.php       ← Edit, update, dan hapus profil user
@@ -145,7 +157,7 @@ app/
 │  ├─ Category.php                   ← Model kategori produk
 │  ├─ Product.php                    ← Model produk/barang
 │  ├─ StockMovement.php              ← Model riwayat pergerakan stok
-│  └─ Shipment.php                   ← Model data pengiriman
+│  └─ Shipment.php                   ← Model data pengiriman (product_id, quantity)
 ├─ Observers/                        ← Observer model jika ada logic otomatis
 ├─ Providers/                        ← Service provider aplikasi
 └─ View/Components/                  ← Class component Blade
@@ -165,7 +177,7 @@ resources/views/
 ├─ auth/                             ← Halaman login/register
 ├─ admin/users/                      ← Halaman manajemen user
 ├─ products/                         ← Halaman CRUD produk
-├─ shipments/                        ← Halaman pengiriman
+├─ shipments/                        ← Halaman pengiriman (Product & Quantity)
 ├─ reports/                          ← Halaman laporan mutasi & stok
 ├─ profile/                          ← Halaman profil user
 ├─ dashboard.blade.php               ← Dashboard setelah login
@@ -177,7 +189,7 @@ database/
 │  ├─ create_categories_table.php    ← Tabel kategori produk
 │  ├─ create_products_table.php      ← Tabel produk
 │  ├─ create_stock_movements_table.php ← Tabel riwayat stok
-│  ├─ create_shipments_table.php     ← Tabel pengiriman
+│  ├─ create_shipments_table.php     ← Tabel pengiriman (Tracking, Product, Quantity)
 │  ├─ create_sessions_table.php      ← Tabel session Laravel
 │  └─ create_cache_table.php         ← Tabel cache Laravel
 └─ seeders/
