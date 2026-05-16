@@ -7,7 +7,6 @@ class UserSeeder extends Seeder
             ['name' => 'Admin Utama',   'email' => 'admin@scm.com',   'role' => 'admin'],
             ['name' => 'Budi Manager',  'email' => 'manager@scm.com', 'role' => 'manager'],
             ['name' => 'Citra Staf',    'email' => 'staf@scm.com',    'role' => 'staf'],
-            ['name' => 'Dedi Kurir',    'email' => 'kurir@scm.com',   'role' => 'kurir'],
         ];
 
         foreach ($users as $user) {

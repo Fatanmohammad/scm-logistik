@@ -80,13 +80,13 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-black text-slate-400 uppercase tracking-wider mb-2 ml-1">
-                                        Kurir <span class="text-emerald-500">(Staff)</span>
+                                        Petugas Pengirim <span class="text-emerald-500">(Staf)</span>
                                     </label>
                                     <select name="user_id" class="w-full px-5 py-4 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white focus:border-slate-900 focus:ring-0 transition-all shadow-sm" required>
-                                        <option value="">-- Pilih Kurir --</option>
-                                        @foreach($kurirs as $kurir)
-                                            <option value="{{ $kurir->id }}" {{ old('user_id') == $kurir->id ? 'selected' : '' }}>
-                                                {{ $kurir->name }} (Kurir)
+                                        <option value="">-- Pilih Petugas --</option>
+                                        @foreach($staffUsers as $staff)
+                                            <option value="{{ $staff->id }}" {{ old('user_id') == $staff->id ? 'selected' : '' }}>
+                                                {{ $staff->name }} (Staf)
                                             </option>
                                         @endforeach
                                     </select>

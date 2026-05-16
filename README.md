@@ -32,22 +32,22 @@ Dibangun menggunakan Laravel 13 + Blade + Tailwind CSS + Vite, dengan sistem aut
 ## Stack & Konvensi
 
 | Aspek | Pilihan |
-+| --- | --- |
-+| Framework | Laravel 13 |
-+| Bahasa Backend | PHP 8.3+ |
-+| Database | MySQL / database Laravel sesuai konfigurasi `.env` |
-+| Frontend | Blade + Tailwind CSS |
-+| Build Tool | Vite |
-+| Package Manager PHP | Composer |
-+| Package Manager JS | npm |
-+| Auth | Login/Register manual melalui `AuthController` |
-+| Authorization | Role-based access menggunakan `RoleMiddleware` |
-+| UI Component | Blade Components bawaan Laravel/Breeze |
+| --- | --- |
+| Framework | Laravel 13 |
+| Bahasa Backend | PHP 8.3+ |
+| Database | MySQL / database Laravel sesuai konfigurasi `.env` |
+| Frontend | Blade + Tailwind CSS |
+| Build Tool | Vite |
+| Package Manager PHP | Composer |
+| Package Manager JS | npm |
+| Auth | Login/Register manual melalui `AuthController` |
+| Authorization | Role-based access menggunakan `RoleMiddleware` |
+| UI Component | Blade Components bawaan Laravel/Breeze |
 
 ### Role Aplikasi
 
 - `admin` — akses penuh, termasuk manajemen user.
-- `manager` — akses laporan stok dan mutasi.
+- `manager` — akses laporan stok, mutasi, dan manajemen produk.
 - `staf` — akses pengelolaan produk, stok, dan pengiriman.
 
 ### Aturan visual penting

@@ -83,7 +83,7 @@
                         @empty
                         <tr>
                             <td colspan="6" class="p-12 text-center">
-                                <div class="flex flex-col items-center gap-3">
+                                <div class="flex flex-col items-center gap-4">
                                     <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center">
                                         <svg class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>

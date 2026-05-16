@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable(); // Tambahkan ini
             $table->string('password');
             $table->rememberToken(); // Tambahkan ini (otomatis buat kolom remember_token)
-            $table->enum('role', ['admin', 'manager', 'staf', 'kurir'])->default('staf');
+            $table->enum('role', ['admin', 'manager', 'staf'])->default('staf');
             $table->timestamps();
         });
     }

@@ -16,9 +16,9 @@ class ShipmentController extends Controller
     }
 
     public function create() {
-        $kurirs = User::where('role', 'staf')->get();
+        $staffUsers = User::where('role', 'staf')->get();
         $products = Product::where('stock', '>', 0)->get(); // Hanya tampilkan produk yang stoknya > 0
-        return view('shipments.create', compact('kurirs', 'products'));
+        return view('shipments.create', compact('staffUsers', 'products'));
     }
 
     public function store(Request $request) {
@@ -64,9 +64,9 @@ class ShipmentController extends Controller
     }
 
     public function edit(Shipment $shipment) {
-        $kurirs = User::where('role', 'staf')->get();
+        $staffUsers = User::where('role', 'staf')->get();
         $products = Product::all();
-        return view('shipments.edit', compact('shipment', 'kurirs', 'products'));
+        return view('shipments.edit', compact('shipment', 'staffUsers', 'products'));
     }
 
     public function update(Request $request, Shipment $shipment) {

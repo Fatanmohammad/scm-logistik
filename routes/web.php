@@ -46,8 +46,8 @@ Route::middleware('auth')->group(function () {
         Route::get('stock', [ReportController::class, 'stock'])->name('stock');
     });
 
-    // Products & Stock (Admin & Staf)
-    Route::middleware('role:admin,staf')->group(function () {
+    // Products & Stock (Admin, Staf, & Manager)
+    Route::middleware('role:admin,staf,manager')->group(function () {
         Route::resource('products', ProductController::class);
         Route::post('stock/update/{product}', [StockController::class, 'update'])->name('stock.update');
     });

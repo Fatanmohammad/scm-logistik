@@ -22,7 +22,6 @@ class User extends Authenticatable
     public function isAdmin(): bool    { return $this->role === 'admin'; }
     public function isManager(): bool  { return $this->role === 'manager'; }
     public function isStaf(): bool     { return $this->role === 'staf'; }
-    public function isKurir(): bool    { return $this->role === 'kurir'; }
 
     /**
      * Relasi ke Stock Movements

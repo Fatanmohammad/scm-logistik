@@ -65,7 +65,7 @@
                     </div>
                     <div>
                         <h4 class="font-extrabold text-slate-800 text-sm">Hak Akses Kontrol (User)</h4>
-                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Konfigurasi akun kredensial user untuk jabatan tingkat staf, kurir, ataupun manager.</p>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Konfigurasi akun kredensial user untuk jabatan tingkat staf, manager, atau administrator.</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-2 pt-2 border-t border-slate-50">
