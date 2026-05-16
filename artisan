@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+
+define('LARAVEL_START', microtime(true));
+
+require __DIR__.'/vendor/autoload.php';
+
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+// Cek apakah $app benar-benar objek, bukan angka
+if (!is_object($app)) {
+    echo "Gawat! bootstrap/app.php tidak mengembalikan objek Application.\n";
+    exit(1);
+}
+
+$status = $app->handleCommand(new Symfony\Component\Console\Input\ArgvInput);
+
+exit($status);
