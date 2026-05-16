@@ -11,15 +11,12 @@ use App\Http\Controllers\{
     ProfileController
 };
 
-// Homepage
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Auth Guest Routes
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
 });
 
 // Authenticated Routes
@@ -58,6 +55,6 @@ Route::middleware('auth')->group(function () {
     // Shipments (All Roles for Index, Admin/Staf for CRUD)
     Route::get('shipments', [ShipmentController::class, 'index'])->name('shipments.index');
     Route::middleware('role:admin,staf')->group(function () {
-        Route::resource('shipments', ShipmentController::class)->except('index');
+        Route::resource('shipments', ShipmentController::class)->except(['index', 'show']);
     });
 });
