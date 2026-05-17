@@ -129,7 +129,9 @@ http://127.0.0.1:8000
 
 | Role | Email | Password |
 | --- | --- | --- |
-| Admin | `admin@gmail.com` | `password123` |
+| Admin | `admin@scm.com` | `password123` |
+| Manager | `manager@scm.com` | `password123` |
+| Staf | `staf@scm.com` | `password123` |
 
 Seeder juga menambahkan kategori awal seperti `Elektronik` dan `Logistik Umum`.
 

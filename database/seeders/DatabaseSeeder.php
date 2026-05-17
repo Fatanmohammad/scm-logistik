@@ -30,15 +30,15 @@ class DatabaseSeeder extends Seeder
 
         // Kurir (untuk petugas pengiriman)
         User::create([
-            'name' => 'Budi Kurir',
-            'email' => 'staff@scm.com',
+            'name' => 'Budi',
+            'email' => 'staf@scm.com',
             'password' => Hash::make('password123'),
             'role' => 'staf', // Sesuai skema Anda, kurir adalah role 'staf'
         ]);
 
         // Manajer Operasional
         User::create([
-            'name' => 'Manager',
+            'name' => 'Kavri',
             'email' => 'manager@scm.com',
             'password' => Hash::make('password123'),
             'role' => 'manager', // Role manager untuk approval
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
         echo "\nSeeding berhasil! Akun admin, staf, dan manajer sudah dibuat.\n";
         echo "\nLogin dengan detail berikut:\n";
         echo "Email: admin@gmail.com | Password: password123 (Role: Admin)\n";
-        echo "Email: staff@scm.com | Password: password123 (Role: Staf)\n";
+        echo "Email: staf@scm.com | Password: password123 (Role: Staf)\n";
         echo "Email: manager@scm.com | Password: password123 (Role: Manager)\n";
     }
 }
