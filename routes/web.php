@@ -46,9 +46,14 @@ Route::middleware('auth')->group(function () {
         Route::get('stock', [ReportController::class, 'stock'])->name('stock');
     });
 
-    // Products & Stock (Admin, Staf, & Manager)
+    // Products (Read-Only for Staf, Full for Admin & Manager)
     Route::middleware('role:admin,staf,manager')->group(function () {
-        Route::resource('products', ProductController::class);
+        Route::resource('products', ProductController::class)->only(['index']);
+    });
+
+    // Products & Stock (Write Access for Admin & Manager)
+    Route::middleware('role:admin,manager')->group(function () {
+        Route::resource('products', ProductController::class)->except(['index']);
         Route::post('stock/update/{product}', [StockController::class, 'update'])->name('stock.update');
     });
 

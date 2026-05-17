@@ -8,9 +8,11 @@
                 </h2>
                 <p class="text-xs text-slate-400 font-semibold mt-0.5 uppercase tracking-wider">Kelola stok dan ketersediaan barang.</p>
             </div>
+            @if(auth()->user()->role !== 'staf')
             <a href="{{ route('products.create') }}" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black rounded-2xl transition-all shadow-xl shadow-indigo-500/20 tracking-widest uppercase">
                 + Add Product
             </a>
+            @endif
         </div>
 
         @if(session('success'))
@@ -55,12 +57,16 @@
                                 </div>
                             </td>
                             <td class="p-6 text-right space-x-3">
+                                @if(auth()->user()->role !== 'staf')
                                 <a href="{{ route('products.edit', $product) }}" class="text-[10px] font-black text-indigo-400 hover:text-indigo-600 uppercase tracking-widest transition-colors">Edit</a>
                                 <form action="{{ route('products.destroy', $product) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-[10px] font-black text-red-400 hover:text-red-600 uppercase tracking-widest transition-colors">Delete</button>
                                 </form>
+                                @else
+                                <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Read Only</span>
+                                @endif
                             </td>
                         </tr>
                         @empty
@@ -73,7 +79,9 @@
                                         </svg>
                                     </div>
                                     <p class="text-sm font-bold text-slate-400">Belum ada data produk.</p>
+                                    @if(auth()->user()->role !== 'staf')
                                     <a href="{{ route('products.create') }}" class="text-xs font-black text-indigo-500 hover:text-indigo-700 uppercase tracking-wider transition-colors">+ Tambah Produk Pertama</a>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

@@ -20,7 +20,9 @@
                 </div>
                 <div class="flex items-center gap-2 pt-2 border-t border-slate-50">
                     <a href="{{ route('products.index') }}" class="flex-1 py-2 bg-slate-50 hover:bg-slate-100 text-slate-600 text-[10px] font-black text-center rounded-lg uppercase tracking-wider transition-colors">Buka Data</a>
+                    @if(auth()->user()->role !== 'staf')
                     <a href="{{ route('products.create') }}" class="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-black text-center rounded-lg uppercase tracking-wider transition-all shadow-sm">+ Tambah</a>
+                    @endif
                 </div>
             </div>
 
@@ -36,7 +38,9 @@
                 </div>
                 <div class="flex items-center gap-2 pt-2 border-t border-slate-50">
                     <a href="{{ route('shipments.index') }}" class="flex-1 py-2 bg-slate-50 hover:bg-slate-100 text-slate-600 text-[10px] font-black text-center rounded-lg uppercase tracking-wider transition-colors">Buka Data</a>
+                    @if(auth()->user()->role !== 'manager')
                     <a href="{{ route('shipments.create') }}" class="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-black text-center rounded-lg uppercase tracking-wider transition-all shadow-sm">+ Tambah</a>
+                    @endif
                 </div>
             </div>
 
