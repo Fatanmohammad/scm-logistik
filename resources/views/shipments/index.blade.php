@@ -82,7 +82,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="p-12 text-center">
+                            <td colspan="8" class="p-12 text-center">
                                 <div class="flex flex-col items-center gap-4">
                                     <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center">
                                         <svg class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

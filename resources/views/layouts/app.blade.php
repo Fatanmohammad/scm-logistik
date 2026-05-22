@@ -71,6 +71,11 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                     </a>
                     @endif
+
+                    <a href="{{ route('profile.edit') }}" class="flex items-center justify-between px-4 py-3.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors {{ request()->routeIs('profile.edit') ? 'sidebar-item-active text-white' : 'text-slate-400 hover:bg-slate-700/30 hover:text-white' }}">
+                        <span>Profil Pengguna</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
                 </nav>
 
                 <div class="px-6 border-t border-slate-700/50 pt-4">
@@ -92,10 +97,10 @@
                     <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Sistem Server Amankan</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <div class="text-right">
-                        <p class="text-xs font-black text-slate-800 uppercase leading-none">{{ Auth::user()->name }}</p>
+                    <a href="{{ route('profile.edit') }}" class="text-right group hover:bg-slate-50 p-2 rounded-xl transition cursor-pointer">
+                        <p class="text-xs font-black text-slate-800 uppercase leading-none group-hover:text-indigo-600 transition">{{ Auth::user()->name }}</p>
                         <p class="text-[9px] font-bold text-indigo-500 uppercase tracking-widest mt-1">Role: {{ Auth::user()->role }}</p>
-                    </div>
+                    </a>
                 </div>
             </header>
 
