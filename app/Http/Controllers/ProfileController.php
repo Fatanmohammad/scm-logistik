@@ -24,12 +24,20 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $request->user()->id],
+        ], [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'name.string' => 'Nama lengkap harus berupa teks.',
+            'name.max' => 'Nama lengkap maksimal 255 karakter.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format alamat email tidak valid.',
+            'email.lowercase' => 'Alamat email harus menggunakan huruf kecil.',
+            'email.unique' => 'Alamat email ini sudah terdaftar.',
         ]);
 
-        $request->user()->fill($request->validated());
+        $request->user()->fill($validated);
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
@@ -45,9 +53,12 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request)
     {
-        $request->validateWithBag('userDeletion', [
+        \Illuminate\Support\Facades\Validator::make($request->all(), [
             'password' => ['required', 'current_password'],
-        ]);
+        ], [
+            'password.required' => 'Kata sandi wajib diisi untuk menghapus akun.',
+            'password.current_password' => 'Kata sandi yang Anda masukkan salah.',
+        ])->validateWithBag('userDeletion');
 
         $user = $request->user();
 
