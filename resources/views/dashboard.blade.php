@@ -55,8 +55,9 @@
                         <p class="text-xs text-slate-400 mt-1 leading-relaxed">Rekapitulasi mutasi keluar masuk barang gudang serta cetak laporan berkas SCM.</p>
                     </div>
                 </div>
-                <div class="pt-2 border-t border-slate-50">
-                    <a href="{{ route('reports.stock') }}" class="block w-full py-2 bg-amber-500 hover:bg-amber-600 text-white text-[10px] font-black text-center rounded-lg uppercase tracking-wider transition-colors shadow-sm">Buka Rekapitulasi Laporan</a>
+                <div class="flex items-center gap-2 pt-2 border-t border-slate-50">
+                    <a href="{{ route('reports.stock') }}" class="flex-1 py-2 bg-amber-500 hover:bg-amber-600 text-white text-[10px] font-black text-center rounded-lg uppercase tracking-wider transition-colors shadow-sm">Rekapitulasi</a>
+                    <a href="{{ route('reports.forecast') }}" class="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-black text-center rounded-lg uppercase tracking-wider transition-colors shadow-sm">Prediksi Stok</a>
                 </div>
             </div>
             @endif

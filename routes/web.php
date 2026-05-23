@@ -8,7 +8,8 @@ use App\Http\Controllers\{
     UserController, 
     ShipmentController, 
     AuthController,
-    ProfileController
+    ProfileController,
+    ForecastController
 };
 
 // Auth Guest Routes
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:admin,manager')->prefix('reports')->name('reports.')->group(function () {
         Route::get('mutation', [ReportController::class, 'mutation'])->name('mutation');
         Route::get('stock', [ReportController::class, 'stock'])->name('stock');
+        Route::get('forecast', [ForecastController::class, 'index'])->name('forecast');
     });
 
     // Products (Read-Only for Staf, Full for Admin & Manager)
