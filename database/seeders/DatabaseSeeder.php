@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         // Kurir (untuk petugas pengiriman)
         User::create([
-            'name' => 'Budi',
+            'name' => 'Ismi',
             'email' => 'staf@scm.com',
             'password' => Hash::make('password123'),
             'role' => 'staf', // Sesuai skema Anda, kurir adalah role 'staf'

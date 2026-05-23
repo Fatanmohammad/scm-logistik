@@ -5,8 +5,8 @@ class UserSeeder extends Seeder
     {
         $users = [
             ['name' => 'Admin Utama',   'email' => 'admin@scm.com',   'role' => 'admin'],
-            ['name' => 'Budi Manager',  'email' => 'manager@scm.com', 'role' => 'manager'],
-            ['name' => 'Citra Staf',    'email' => 'staf@scm.com',    'role' => 'staf'],
+            ['name' => 'Manager',  'email' => 'manager@scm.com', 'role' => 'manager'],
+            ['name' => 'Staf',          'email' => 'staf@scm.com',    'role' => 'staf'],
         ];
 
         foreach ($users as $user) {
