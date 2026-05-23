@@ -46,6 +46,38 @@
             </table>
         </div>
 
+        {{-- Section AI Groq --}}
+        <div class="custom-box p-6 space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m1.636-6.364l.707.707M12 21v-1M6.343 17.657l-.707.707M17.657 6.343l-.707.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-slate-800 text-sm">Analisis AI (Groq)</h4>
+                    <p class="text-xs text-slate-400 mt-0.5">Rekomendasi tindakan otomatis berdasarkan data forecast di atas.</p>
+                </div>
+            </div>
+
+            @if(session('ai_result'))
+                <div class="bg-violet-50 border border-violet-100 rounded-xl p-4 text-sm text-slate-700 leading-relaxed whitespace-pre-line">
+                    {{ session('ai_result') }}
+                </div>
+            @endif
+
+            @if(session('ai_error'))
+                <div class="bg-red-50 border border-red-100 rounded-xl p-4 text-sm text-red-600">
+                    {{ session('ai_error') }}
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('reports.forecast.analyze') }}">
+                @csrf
+                <button type="submit" class="w-full py-2.5 bg-violet-600 hover:bg-violet-700 text-white text-[10px] font-black rounded-lg uppercase tracking-wider transition-colors shadow-sm">
+                    ✦ Analisis dengan AI
+                </button>
+            </form>
+        </div>
+
         <p class="text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] pt-6">
             Sistem SCM Logistik • Universitas Tadulako 2026
         </p>
